@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  build-oe:
+    image: build-oe-kirkstone
+    
+    build:
+      context: ${DOCKERFILE}
+      dockerfile: Dockerfile
+
+    environment:
+      - CURRENT_USER_PATH=$PWD
+      - CURRENT_UID=$UID
+      - CURRENT_USER=$USER
+
+    volumes:
+      - $PWD/:$PWD
+      - /home/$USER/.yoctoshare:/home/$USER/.yoctoshare
+      - /home/$USER/.ssh:/home/$USER/.ssh
+      - /dev/net/tun:/dev/net/tun
+
